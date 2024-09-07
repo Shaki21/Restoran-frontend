@@ -1,7 +1,6 @@
 <template>
   <v-container fluid class="full-screen">
-    <v-row no-gutters>
-      <v-col cols="6" class="gradient-background"></v-col>
+      <v-col cols="12" sm="6" class="gradient-background"></v-col>
       <v-col cols="1" class="divider"></v-col>
       <v-col cols="5">
         <v-card>
@@ -28,26 +27,26 @@
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row>
   </v-container>
 </template>
 
 <style>
 .full-screen {
-  height: full;
-  width: full;
+  height: 100vh;
+  width: 100vw;
   display: flex;
 }
 
 .gradient-background {
   background: linear-gradient(45deg, royalblue, lightblue);
-  height: ;
+  height: full;
 }
 
 .divider {
   background-color: white;
   width: 1px;
 }
+
 </style>
 
 <script>
