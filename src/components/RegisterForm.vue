@@ -1,10 +1,13 @@
 <template>
   <v-container fluid class="full-screen">
-      <v-col cols="12" sm="6" class="gradient-background"></v-col>
-      <v-col cols="1" class="divider"></v-col>
-      <v-col cols="5">
-        <v-card>
-          <v-card-title>Create Account</v-card-title>
+      <v-col cols="12" sm="6" class="gradient-background">
+        <v-text class="welcome-back">Welcome back!</v-text>
+
+        <v-btn @click="submitSignUp" color="blue" >Sign In</v-btn>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-card class="custom-card">
+          <v-card-title class="v-card-title">Create Account</v-card-title>
           <v-card-text>
             <v-form ref="signupForm" v-model="valid">
               <v-text-field
@@ -22,7 +25,7 @@
                 required
               ></v-text-field>
 
-              <v-btn @click="submitSignUp" color="primary" block>Sign Up</v-btn>
+              <v-btn @click="submitSignUp" color="blue" block>Sign Up</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -35,17 +38,30 @@
   height: 100vh;
   width: 100vw;
   display: flex;
+  
 }
-
 .gradient-background {
   background: linear-gradient(45deg, royalblue, lightblue);
   height: full;
 }
-
-.divider {
-  background-color: white;
-  width: 1px;
+.custom-card {
+  height: 40vh;
+  width: 40vw;
+  margin-top: 25vh;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-left: auto;
 }
+.v-card-title {
+  text-align: center;
+}
+.welcome-back {
+  font-size: 3em;
+  text-align: center;
+  color: white;
+  
+}
+
 
 </style>
 
