@@ -9,18 +9,12 @@
 
       </v-col>
         <v-card flat class="custom-card">
-          <v-img
-            :width="300"
-            aspect-ratio="16/9"
-            cover
-            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          ></v-img>
-          <v-card-title class="v-card-title">Create Account</v-card-title>
+          <v-card-title class="v-card-title">Just a few more details</v-card-title>
           <v-card-text>
             <v-form ref="signupForm" class="form" v-model="valid">
               <v-text-field
-                v-model="username"
-                label="Username"
+                v-model="firstname"
+                label="First Name"
                 :rules="[rules.required]"
                 required
                 rounded="0"
@@ -28,14 +22,23 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="password"
-                label="Password"
-                type="password"
-                :rules="[rules.required, rules.min]"
+                v-model="lastname"
+                label="Last Name"
+                :rules="[rules.required]"
                 required
                 rounded="0"
-                prepend-inner-icon="mdi-lock"
+                prepend-inner-icon="mdi-account"
               ></v-text-field>
+
+              <v-select
+                v-model="position"
+                :items="positions"
+                label="Position"
+                :rules="[rules.required]"
+                required
+                rounded="0"
+                prepend-inner-icon="mdi-human-male"
+              ></v-select>
 
               <v-btn flat rounded="0" @click="submitSignUp" color="blue" block>Sign Up</v-btn>
             </v-form>
@@ -70,26 +73,36 @@
 
 }
 .custom-card {
-  height: 80vh;
-  width: 75%;
+  height: 60vh;
+  width: 50vw;
   display: grid;
   place-items: center;
 }
 .v-card-title {
+  font-size: 4em;
+  font-family: 'Georgia', serif;
+  margin-top: 60px;
   text-align: center;
-  font-size: 32px;
 }
 .welcome-back {
-  font-size: 3em;
+  font-family: 'Georgia', serif;
+  font-size: 4em;
   text-align: center;
   color: white;
-  
+}
+
+.subtitle {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  text-align: center;
+
+  color: white;
+
 }
 
 .v-card-text {
   width: 80%;
 }
-
 
 </style>
 
@@ -99,12 +112,13 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      valid: false,
-      username: '',
-      password: '',
+      firstname: '',
+      lastname: '',
+      position: '',
+      positions: ['Cleaner', 'Waiter', 'Chef', 'Manager'],
       rules: {
         required: value => !!value || 'Required.',
-        min: value => value.length >= 6 || 'Min 6 characters',
+        min: v => v.length >= 5 || 'Min 5 characters',
       },
     };
   },
@@ -113,13 +127,26 @@ export default {
       if(this.valid) {
         const user = {
           username: this.username, 
-          password: this.password
+          password: this.password,
+          additionalInfo: {
+            firstname: this.firstname,
+            lastname: this.lastname,
+            position: this.position,
+          },
         };
         axios.post('http://localhost:8080/api/users', user)
           .then(response => {
             console.log('User created', response.data);
-            // Ovdje možeš dodati logiku, npr. preusmjeravanje na drugu stranicu
-            this.$router.push({path: '/additional-information', query: {username: this.username}});
+            // Redirect to home page
+            this.$router.push({
+              path: '/welcome',
+              query: {
+                username: this.username,
+                firstname: this.firstname,
+                lastname: this.lastname,
+                position: this.position,
+              },
+            });
           })
           .catch(error => {
             console.error('Error creating user', error);
