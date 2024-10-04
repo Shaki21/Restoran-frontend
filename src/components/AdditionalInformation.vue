@@ -38,13 +38,73 @@
             rounded="0"
             prepend-inner-icon="mdi-human-male"
           ></v-select>
-
-          <v-btn flat rounded="0" @click="submitSignUp" color="blue" block>Submit</v-btn>
+          
+          <v-row>
+            <v-col cols="6">
+              <v-btn class="reg-back-btn" flat rounded="0"  @click="goBack" block>back</v-btn>
+            </v-col>
+            <v-col cols="6">
+              <v-btn flat rounded="0" @click="submitSignUp" color="blue" block>Submit</v-btn>
+            </v-col>
+          </v-row>
         </v-form>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
+
+<style>
+.full-screen-ad {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+.gradient-background {
+  background: linear-gradient(90deg, rgba(41,70,100,1) 0%, rgba(87,132,173,1) 100%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-ad {
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  color: #fff;
+}
+.custom-card-ad {
+  height: 80vh;
+  width: 50vw;
+  display: grid;
+  place-items: center;
+}
+.v-card-title-ad {
+  font-size: 3.5em;
+  font-family: 'Georgia', serif;
+  margin-top: 60px;
+  text-align: center;
+}
+.welcome-back-ad {
+  font-family: 'Georgia', serif;
+  font-size: 4em;
+  text-align: center;
+  color: white;
+}
+.subtitle-ad {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  text-align: center;
+  color: white;
+}
+.reg-back-btn {
+  background-color: white;
+  border: 2px solid #2196F3;
+  color: #2196F3 !important;
+}
+</style>
 
 <script>
 import axios from 'axios';
@@ -70,6 +130,9 @@ export default {
   methods: {
     redirectToSignIn() {
       this.$router.push({ path: '/sign-in' });
+    },
+    goBack() {
+      this.$router.go(-1);
     },
     submitSignUp() {
       if (this.valid) {
@@ -127,10 +190,7 @@ export default {
       this.$router.push({
         path: '/welcome',
         query: {
-          username: this.username,
-          firstname: this.firstname,
-          lastname: this.lastname,
-          position: this.position,
+          username: this.username
         },
       });
     },
@@ -138,50 +198,3 @@ export default {
 };
 </script>
 
-<style>
-.full-screen-ad {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-}
-.gradient-background {
-  background: linear-gradient(90deg, rgba(41,70,100,1) 0%, rgba(87,132,173,1) 100%);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.title-ad {
-  display: grid;
-  place-items: center;
-  height: 50vh;
-  color: #fff;
-}
-.custom-card-ad {
-  height: 80vh;
-  width: 50vw;
-  display: grid;
-  place-items: center;
-}
-.v-card-title-ad {
-  font-size: 3.5em;
-  font-family: 'Georgia', serif;
-  margin-top: 60px;
-  text-align: center;
-}
-.welcome-back-ad {
-  font-family: 'Georgia', serif;
-  font-size: 4em;
-  text-align: center;
-  color: white;
-}
-.subtitle-ad {
-  font-family: 'Georgia', serif;
-  font-size: 1.2em;
-  text-align: center;
-  color: white;
-}
-</style>

@@ -4,7 +4,7 @@
         <div class="title">
           <v-text class="welcome-back">Welcome back!</v-text>
           <v-text class="subtitle">If you already have account please Sign in from here!</v-text>
-          <v-btn rounded="xl" @click="submitSignUp" color="blue" >Sign In</v-btn>
+          <v-btn rounded="xl" @click="submitSignIn" color="blue" >Sign In</v-btn>
         </div>
 
       </v-col>
@@ -44,54 +44,6 @@
   </v-container>
 </template>
 
-<style>
-.full-screen {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  
-}
-.gradient-background {
-  background: linear-gradient(90deg, rgba(41,70,100,1) 0%, rgba(87,132,173,1) 100%);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title {
-  display: grid;
-  place-items: center;
-  height: 50vh;
-  color: #fff;
-
-}
-.custom-card {
-  height: 80vh;
-  width: 75%;
-  display: grid;
-  place-items: center;
-}
-.v-card-title {
-  text-align: center;
-  font-size: 32px;
-}
-.welcome-back {
-  font-size: 3em;
-  text-align: center;
-  color: white;
-  
-}
-
-.v-card-text {
-  width: 80%;
-}
-
-
-</style>
 
 <script>
 import axios from 'axios';
@@ -128,6 +80,55 @@ export default {
         console.error('Form is not valid');
       }
     },
+    submitSignIn() {
+      this.$router.push({path: '/login-page'});
+    },
   },
 };
 </script>
+
+
+<style>
+.full-screen {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+.gradient-background {
+  background: linear-gradient(90deg, rgba(41,70,100,1) 0%, rgba(87,132,173,1) 100%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  color: #fff;
+}
+
+.custom-card {
+  height: 80vh;
+  width: 75%;
+  display: grid;
+  place-items: center;
+}
+.v-card-title {
+  text-align: center;
+  font-size: 32px;
+}
+.welcome-back {
+  font-size: 3em;
+  text-align: center;
+  color: white;
+}
+
+.v-card-text {
+  width: 80%;
+}
+</style>
